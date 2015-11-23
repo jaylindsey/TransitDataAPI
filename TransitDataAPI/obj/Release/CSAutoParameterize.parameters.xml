@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-TransitDataAPI-20151021120131.mdf;Initial Catalog=aspnet-TransitDataAPI-20151021120131;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Harry\\Documents\\GitHub\\TransitBackendApp\\TransitDataAPI\\TransitDataAPI\\TransitDataAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="metrotransit_dbEntities-Web.config Connection String" description="metrotransit_dbEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.metrotransit_dbEntities.csdl|res://*/Models.metrotransit_dbEntities.ssdl|res://*/Models.metrotransit_dbEntities.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=ffldfgjjcg.database.windows.net;initial catalog=metrotransit_db;persist security info=True;user id=metrotransitadmin;password=Fyym4jzG9$5?;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Harry\\Documents\\GitHub\\TransitBackendApp\\TransitDataAPI\\TransitDataAPI\\TransitDataAPI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='metrotransit_dbEntities']/@connectionString" />
+  </parameter>
+</parameters>

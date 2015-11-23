@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="metrotransit_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="agency">
+          <Key>
+            <PropertyRef Name="agency_id" />
+          </Key>
+          <Property Name="agency_id" Type="int" Nullable="false" />
+          <Property Name="agency_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="agency_url" Type="nvarchar" MaxLength="256" />
+          <Property Name="agency_timezone" Type="nvarchar" MaxLength="16" />
+          <Property Name="agency_lang" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="authenticated_users">
+          <Key>
+            <PropertyRef Name="authenticated_user_id" />
+          </Key>
+          <Property Name="authenticated_user_id" Type="int" Nullable="false" />
+          <Property Name="user_login" Type="nvarchar" MaxLength="64" />
+          <Property Name="user_password" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="batch_load_date">
+          <Key>
+            <PropertyRef Name="load_date" />
+          </Key>
+          <Property Name="load_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="calendar">
+          <Key>
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="start_date" />
+          </Key>
+          <Property Name="service_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="monday" Type="bit" />
+          <Property Name="tuesday" Type="bit" />
+          <Property Name="wednesday" Type="bit" />
+          <Property Name="thursday" Type="bit" />
+          <Property Name="friday" Type="bit" />
+          <Property Name="saturday" Type="bit" />
+          <Property Name="sunday" Type="bit" />
+          <Property Name="start_date" Type="datetime" Nullable="false" />
+          <Property Name="end_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="calendar_dates">
+          <Key>
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="service_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="exception_type" Type="nvarchar" MaxLength="48" />
+        </EntityType>
+        <EntityType Name="route_directions">
+          <Key>
+            <PropertyRef Name="route_id" />
+            <PropertyRef Name="direction_short" />
+          </Key>
+          <Property Name="route_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="direction_long" Type="nvarchar" MaxLength="16" />
+          <Property Name="direction_short" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="routes">
+          <Key>
+            <PropertyRef Name="route_id" />
+          </Key>
+          <Property Name="route_id" Type="nvarchar" MaxLength="55" Nullable="false" />
+          <Property Name="agency_id" Type="int" />
+          <Property Name="route_short_name" Type="nvarchar" MaxLength="16" />
+          <Property Name="route_long_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="route_desc" Type="nvarchar" MaxLength="8" />
+          <Property Name="route_type" Type="int" />
+          <Property Name="route_url" Type="nvarchar" MaxLength="256" />
+          <Property Name="route_color" Type="nvarchar" MaxLength="48" />
+          <Property Name="route_text_color" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="shapes">
+          <Key>
+            <PropertyRef Name="shape_id" />
+            <PropertyRef Name="shape_pt_sequence" />
+          </Key>
+          <Property Name="shape_id" Type="int" Nullable="false" />
+          <Property Name="shape_pt_lat" Type="float" />
+          <Property Name="shape_pt_lon" Type="float" />
+          <Property Name="shape_pt_sequence" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stop_times">
+          <Key>
+            <PropertyRef Name="trip_id" />
+            <PropertyRef Name="arrival_time" />
+            <PropertyRef Name="stop_id" />
+          </Key>
+          <Property Name="trip_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="arrival_time" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="departure_time" Type="nvarchar" MaxLength="16" />
+          <Property Name="stop_id" Type="int" Nullable="false" />
+          <Property Name="stop_sequence" Type="int" />
+          <Property Name="pickup_type" Type="int" />
+          <Property Name="drop_off_type" Type="int" />
+        </EntityType>
+        <EntityType Name="stops">
+          <Key>
+            <PropertyRef Name="stop_id" />
+          </Key>
+          <Property Name="stop_id" Type="int" Nullable="false" />
+          <Property Name="stop_name" Type="nvarchar" MaxLength="256" />
+          <Property Name="stop_desc" Type="nvarchar" MaxLength="16" />
+          <Property Name="stop_lat" Type="nvarchar" MaxLength="32" />
+          <Property Name="stop_lon" Type="nvarchar" MaxLength="32" />
+          <Property Name="stop_street" Type="nvarchar" MaxLength="64" />
+          <Property Name="stop_city" Type="nvarchar" MaxLength="64" />
+          <Property Name="stop_region" Type="nvarchar" MaxLength="64" />
+          <Property Name="stop_postcode" Type="nvarchar" MaxLength="16" />
+          <Property Name="stop_country" Type="nvarchar" MaxLength="32" />
+          <Property Name="zone_id" Type="nvarchar" MaxLength="16" />
+          <Property Name="wheelchair_boarding" Type="int" />
+          <Property Name="stop_url" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="trips">
+          <Key>
+            <PropertyRef Name="trip_id" />
+          </Key>
+          <Property Name="route_id" Type="nvarchar" MaxLength="32" />
+          <Property Name="service_id" Type="nvarchar" MaxLength="48" />
+          <Property Name="trip_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="trip_headsign" Type="nvarchar" MaxLength="64" />
+          <Property Name="block_id" Type="int" />
+          <Property Name="shape_id" Type="int" />
+          <Property Name="wheelchair_accessible" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="metrotransit_dbModelStoreContainer">
+          <EntitySet Name="agency" EntityType="Self.agency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="authenticated_users" EntityType="Self.authenticated_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="batch_load_date" EntityType="Self.batch_load_date" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="calendar" EntityType="Self.calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="calendar_dates" EntityType="Self.calendar_dates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="route_directions" EntityType="Self.route_directions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="routes" EntityType="Self.routes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shapes" EntityType="Self.shapes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stop_times" EntityType="Self.stop_times" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stops" EntityType="Self.stops" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="trips" EntityType="Self.trips" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="metrotransit_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="agency">
+          <Key>
+            <PropertyRef Name="agency_id" />
+          </Key>
+          <Property Name="agency_id" Type="Int32" Nullable="false" />
+          <Property Name="agency_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="agency_url" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="agency_timezone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="agency_lang" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="authenticated_users">
+          <Key>
+            <PropertyRef Name="authenticated_user_id" />
+          </Key>
+          <Property Name="authenticated_user_id" Type="Int32" Nullable="false" />
+          <Property Name="user_login" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="user_password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="batch_load_date">
+          <Key>
+            <PropertyRef Name="load_date" />
+          </Key>
+          <Property Name="load_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="calendar">
+          <Key>
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="start_date" />
+          </Key>
+          <Property Name="service_id" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="monday" Type="Boolean" />
+          <Property Name="tuesday" Type="Boolean" />
+          <Property Name="wednesday" Type="Boolean" />
+          <Property Name="thursday" Type="Boolean" />
+          <Property Name="friday" Type="Boolean" />
+          <Property Name="saturday" Type="Boolean" />
+          <Property Name="sunday" Type="Boolean" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="calendar_dates">
+          <Key>
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="service_id" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="exception_type" Type="String" MaxLength="48" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="route_directions">
+          <Key>
+            <PropertyRef Name="route_id" />
+            <PropertyRef Name="direction_short" />
+          </Key>
+          <Property Name="route_id" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="direction_long" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="direction_short" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="route">
+          <Key>
+            <PropertyRef Name="route_id" />
+          </Key>
+          <Property Name="route_id" Type="String" MaxLength="55" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="agency_id" Type="Int32" />
+          <Property Name="route_short_name" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="route_long_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="route_desc" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="route_type" Type="Int32" />
+          <Property Name="route_url" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="route_color" Type="String" MaxLength="48" FixedLength="false" Unicode="true" />
+          <Property Name="route_text_color" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="shape">
+          <Key>
+            <PropertyRef Name="shape_id" />
+            <PropertyRef Name="shape_pt_sequence" />
+          </Key>
+          <Property Name="shape_id" Type="Int32" Nullable="false" />
+          <Property Name="shape_pt_lat" Type="Double" />
+          <Property Name="shape_pt_lon" Type="Double" />
+          <Property Name="shape_pt_sequence" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stop_times">
+          <Key>
+            <PropertyRef Name="trip_id" />
+            <PropertyRef Name="arrival_time" />
+            <PropertyRef Name="stop_id" />
+          </Key>
+          <Property Name="trip_id" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="arrival_time" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="departure_time" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="stop_id" Type="Int32" Nullable="false" />
+          <Property Name="stop_sequence" Type="Int32" />
+          <Property Name="pickup_type" Type="Int32" />
+          <Property Name="drop_off_type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="stop">
+          <Key>
+            <PropertyRef Name="stop_id" />
+          </Key>
+          <Property Name="stop_id" Type="Int32" Nullable="false" />
+          <Property Name="stop_name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="stop_desc" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="stop_lat" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="stop_lon" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="stop_street" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="stop_city" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="stop_region" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="stop_postcode" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="stop_country" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="zone_id" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="wheelchair_boarding" Type="Int32" />
+          <Property Name="stop_url" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="trip">
+          <Key>
+            <PropertyRef Name="trip_id" />
+          </Key>
+          <Property Name="route_id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="service_id" Type="String" MaxLength="48" FixedLength="false" Unicode="true" />
+          <Property Name="trip_id" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="trip_headsign" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="block_id" Type="Int32" />
+          <Property Name="shape_id" Type="Int32" />
+          <Property Name="wheelchair_accessible" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="metrotransit_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="agencies" EntityType="Self.agency" />
+          <EntitySet Name="authenticated_users" EntityType="Self.authenticated_users" />
+          <EntitySet Name="batch_load_date" EntityType="Self.batch_load_date" />
+          <EntitySet Name="calendars" EntityType="Self.calendar" />
+          <EntitySet Name="calendar_dates" EntityType="Self.calendar_dates" />
+          <EntitySet Name="route_directions" EntityType="Self.route_directions" />
+          <EntitySet Name="routes" EntityType="Self.route" />
+          <EntitySet Name="shapes" EntityType="Self.shape" />
+          <EntitySet Name="stop_times" EntityType="Self.stop_times" />
+          <EntitySet Name="stops" EntityType="Self.stop" />
+          <EntitySet Name="trips" EntityType="Self.trip" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="metrotransit_dbModelStoreContainer" CdmEntityContainer="metrotransit_dbEntities">
+          <EntitySetMapping Name="agencies">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.agency">
+              <MappingFragment StoreEntitySet="agency">
+                <ScalarProperty Name="agency_id" ColumnName="agency_id" />
+                <ScalarProperty Name="agency_name" ColumnName="agency_name" />
+                <ScalarProperty Name="agency_url" ColumnName="agency_url" />
+                <ScalarProperty Name="agency_timezone" ColumnName="agency_timezone" />
+                <ScalarProperty Name="agency_lang" ColumnName="agency_lang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="authenticated_users">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.authenticated_users">
+              <MappingFragment StoreEntitySet="authenticated_users">
+                <ScalarProperty Name="authenticated_user_id" ColumnName="authenticated_user_id" />
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="batch_load_date">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.batch_load_date">
+              <MappingFragment StoreEntitySet="batch_load_date">
+                <ScalarProperty Name="load_date" ColumnName="load_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="calendars">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.calendar">
+              <MappingFragment StoreEntitySet="calendar">
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="monday" ColumnName="monday" />
+                <ScalarProperty Name="tuesday" ColumnName="tuesday" />
+                <ScalarProperty Name="wednesday" ColumnName="wednesday" />
+                <ScalarProperty Name="thursday" ColumnName="thursday" />
+                <ScalarProperty Name="friday" ColumnName="friday" />
+                <ScalarProperty Name="saturday" ColumnName="saturday" />
+                <ScalarProperty Name="sunday" ColumnName="sunday" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="calendar_dates">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.calendar_dates">
+              <MappingFragment StoreEntitySet="calendar_dates">
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="exception_type" ColumnName="exception_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="route_directions">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.route_directions">
+              <MappingFragment StoreEntitySet="route_directions">
+                <ScalarProperty Name="route_id" ColumnName="route_id" />
+                <ScalarProperty Name="direction_long" ColumnName="direction_long" />
+                <ScalarProperty Name="direction_short" ColumnName="direction_short" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="routes">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.route">
+              <MappingFragment StoreEntitySet="routes">
+                <ScalarProperty Name="route_id" ColumnName="route_id" />
+                <ScalarProperty Name="agency_id" ColumnName="agency_id" />
+                <ScalarProperty Name="route_short_name" ColumnName="route_short_name" />
+                <ScalarProperty Name="route_long_name" ColumnName="route_long_name" />
+                <ScalarProperty Name="route_desc" ColumnName="route_desc" />
+                <ScalarProperty Name="route_type" ColumnName="route_type" />
+                <ScalarProperty Name="route_url" ColumnName="route_url" />
+                <ScalarProperty Name="route_color" ColumnName="route_color" />
+                <ScalarProperty Name="route_text_color" ColumnName="route_text_color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shapes">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.shape">
+              <MappingFragment StoreEntitySet="shapes">
+                <ScalarProperty Name="shape_id" ColumnName="shape_id" />
+                <ScalarProperty Name="shape_pt_lat" ColumnName="shape_pt_lat" />
+                <ScalarProperty Name="shape_pt_lon" ColumnName="shape_pt_lon" />
+                <ScalarProperty Name="shape_pt_sequence" ColumnName="shape_pt_sequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stop_times">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.stop_times">
+              <MappingFragment StoreEntitySet="stop_times">
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="arrival_time" ColumnName="arrival_time" />
+                <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+                <ScalarProperty Name="stop_id" ColumnName="stop_id" />
+                <ScalarProperty Name="stop_sequence" ColumnName="stop_sequence" />
+                <ScalarProperty Name="pickup_type" ColumnName="pickup_type" />
+                <ScalarProperty Name="drop_off_type" ColumnName="drop_off_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stops">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.stop">
+              <MappingFragment StoreEntitySet="stops">
+                <ScalarProperty Name="stop_id" ColumnName="stop_id" />
+                <ScalarProperty Name="stop_name" ColumnName="stop_name" />
+                <ScalarProperty Name="stop_desc" ColumnName="stop_desc" />
+                <ScalarProperty Name="stop_lat" ColumnName="stop_lat" />
+                <ScalarProperty Name="stop_lon" ColumnName="stop_lon" />
+                <ScalarProperty Name="stop_street" ColumnName="stop_street" />
+                <ScalarProperty Name="stop_city" ColumnName="stop_city" />
+                <ScalarProperty Name="stop_region" ColumnName="stop_region" />
+                <ScalarProperty Name="stop_postcode" ColumnName="stop_postcode" />
+                <ScalarProperty Name="stop_country" ColumnName="stop_country" />
+                <ScalarProperty Name="zone_id" ColumnName="zone_id" />
+                <ScalarProperty Name="wheelchair_boarding" ColumnName="wheelchair_boarding" />
+                <ScalarProperty Name="stop_url" ColumnName="stop_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trips">
+            <EntityTypeMapping TypeName="metrotransit_dbModel.trip">
+              <MappingFragment StoreEntitySet="trips">
+                <ScalarProperty Name="route_id" ColumnName="route_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="trip_headsign" ColumnName="trip_headsign" />
+                <ScalarProperty Name="block_id" ColumnName="block_id" />
+                <ScalarProperty Name="shape_id" ColumnName="shape_id" />
+                <ScalarProperty Name="wheelchair_accessible" ColumnName="wheelchair_accessible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

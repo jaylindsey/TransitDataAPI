@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="metrotransit_dbModelStoreContainer" CdmEntityContainer="metrotransit_dbEntities">
+    <EntitySetMapping Name="agencies">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.agency">
+        <MappingFragment StoreEntitySet="agency">
+          <ScalarProperty Name="agency_id" ColumnName="agency_id" />
+          <ScalarProperty Name="agency_name" ColumnName="agency_name" />
+          <ScalarProperty Name="agency_url" ColumnName="agency_url" />
+          <ScalarProperty Name="agency_timezone" ColumnName="agency_timezone" />
+          <ScalarProperty Name="agency_lang" ColumnName="agency_lang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="authenticated_users">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.authenticated_users">
+        <MappingFragment StoreEntitySet="authenticated_users">
+          <ScalarProperty Name="authenticated_user_id" ColumnName="authenticated_user_id" />
+          <ScalarProperty Name="user_login" ColumnName="user_login" />
+          <ScalarProperty Name="user_password" ColumnName="user_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="batch_load_date">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.batch_load_date">
+        <MappingFragment StoreEntitySet="batch_load_date">
+          <ScalarProperty Name="load_date" ColumnName="load_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="calendars">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.calendar">
+        <MappingFragment StoreEntitySet="calendar">
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="monday" ColumnName="monday" />
+          <ScalarProperty Name="tuesday" ColumnName="tuesday" />
+          <ScalarProperty Name="wednesday" ColumnName="wednesday" />
+          <ScalarProperty Name="thursday" ColumnName="thursday" />
+          <ScalarProperty Name="friday" ColumnName="friday" />
+          <ScalarProperty Name="saturday" ColumnName="saturday" />
+          <ScalarProperty Name="sunday" ColumnName="sunday" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="calendar_dates">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.calendar_dates">
+        <MappingFragment StoreEntitySet="calendar_dates">
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="exception_type" ColumnName="exception_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="route_directions">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.route_directions">
+        <MappingFragment StoreEntitySet="route_directions">
+          <ScalarProperty Name="route_id" ColumnName="route_id" />
+          <ScalarProperty Name="direction_long" ColumnName="direction_long" />
+          <ScalarProperty Name="direction_short" ColumnName="direction_short" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="routes">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.route">
+        <MappingFragment StoreEntitySet="routes">
+          <ScalarProperty Name="route_id" ColumnName="route_id" />
+          <ScalarProperty Name="agency_id" ColumnName="agency_id" />
+          <ScalarProperty Name="route_short_name" ColumnName="route_short_name" />
+          <ScalarProperty Name="route_long_name" ColumnName="route_long_name" />
+          <ScalarProperty Name="route_desc" ColumnName="route_desc" />
+          <ScalarProperty Name="route_type" ColumnName="route_type" />
+          <ScalarProperty Name="route_url" ColumnName="route_url" />
+          <ScalarProperty Name="route_color" ColumnName="route_color" />
+          <ScalarProperty Name="route_text_color" ColumnName="route_text_color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shapes">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.shape">
+        <MappingFragment StoreEntitySet="shapes">
+          <ScalarProperty Name="shape_id" ColumnName="shape_id" />
+          <ScalarProperty Name="shape_pt_lat" ColumnName="shape_pt_lat" />
+          <ScalarProperty Name="shape_pt_lon" ColumnName="shape_pt_lon" />
+          <ScalarProperty Name="shape_pt_sequence" ColumnName="shape_pt_sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stop_times">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.stop_times">
+        <MappingFragment StoreEntitySet="stop_times">
+          <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+          <ScalarProperty Name="arrival_time" ColumnName="arrival_time" />
+          <ScalarProperty Name="departure_time" ColumnName="departure_time" />
+          <ScalarProperty Name="stop_id" ColumnName="stop_id" />
+          <ScalarProperty Name="stop_sequence" ColumnName="stop_sequence" />
+          <ScalarProperty Name="pickup_type" ColumnName="pickup_type" />
+          <ScalarProperty Name="drop_off_type" ColumnName="drop_off_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stops">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.stop">
+        <MappingFragment StoreEntitySet="stops">
+          <ScalarProperty Name="stop_id" ColumnName="stop_id" />
+          <ScalarProperty Name="stop_name" ColumnName="stop_name" />
+          <ScalarProperty Name="stop_desc" ColumnName="stop_desc" />
+          <ScalarProperty Name="stop_lat" ColumnName="stop_lat" />
+          <ScalarProperty Name="stop_lon" ColumnName="stop_lon" />
+          <ScalarProperty Name="stop_street" ColumnName="stop_street" />
+          <ScalarProperty Name="stop_city" ColumnName="stop_city" />
+          <ScalarProperty Name="stop_region" ColumnName="stop_region" />
+          <ScalarProperty Name="stop_postcode" ColumnName="stop_postcode" />
+          <ScalarProperty Name="stop_country" ColumnName="stop_country" />
+          <ScalarProperty Name="zone_id" ColumnName="zone_id" />
+          <ScalarProperty Name="wheelchair_boarding" ColumnName="wheelchair_boarding" />
+          <ScalarProperty Name="stop_url" ColumnName="stop_url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trips">
+      <EntityTypeMapping TypeName="metrotransit_dbModel.trip">
+        <MappingFragment StoreEntitySet="trips">
+          <ScalarProperty Name="route_id" ColumnName="route_id" />
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+          <ScalarProperty Name="trip_headsign" ColumnName="trip_headsign" />
+          <ScalarProperty Name="block_id" ColumnName="block_id" />
+          <ScalarProperty Name="shape_id" ColumnName="shape_id" />
+          <ScalarProperty Name="wheelchair_accessible" ColumnName="wheelchair_accessible" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

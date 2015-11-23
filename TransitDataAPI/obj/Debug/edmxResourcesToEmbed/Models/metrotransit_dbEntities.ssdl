@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="metrotransit_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="agency">
+    <Key>
+      <PropertyRef Name="agency_id" />
+    </Key>
+    <Property Name="agency_id" Type="int" Nullable="false" />
+    <Property Name="agency_name" Type="nvarchar" MaxLength="256" />
+    <Property Name="agency_url" Type="nvarchar" MaxLength="256" />
+    <Property Name="agency_timezone" Type="nvarchar" MaxLength="16" />
+    <Property Name="agency_lang" Type="nvarchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="authenticated_users">
+    <Key>
+      <PropertyRef Name="authenticated_user_id" />
+    </Key>
+    <Property Name="authenticated_user_id" Type="int" Nullable="false" />
+    <Property Name="user_login" Type="nvarchar" MaxLength="64" />
+    <Property Name="user_password" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="batch_load_date">
+    <Key>
+      <PropertyRef Name="load_date" />
+    </Key>
+    <Property Name="load_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="calendar">
+    <Key>
+      <PropertyRef Name="service_id" />
+      <PropertyRef Name="start_date" />
+    </Key>
+    <Property Name="service_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="monday" Type="bit" />
+    <Property Name="tuesday" Type="bit" />
+    <Property Name="wednesday" Type="bit" />
+    <Property Name="thursday" Type="bit" />
+    <Property Name="friday" Type="bit" />
+    <Property Name="saturday" Type="bit" />
+    <Property Name="sunday" Type="bit" />
+    <Property Name="start_date" Type="datetime" Nullable="false" />
+    <Property Name="end_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="calendar_dates">
+    <Key>
+      <PropertyRef Name="service_id" />
+      <PropertyRef Name="date" />
+    </Key>
+    <Property Name="service_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="date" Type="datetime" Nullable="false" />
+    <Property Name="exception_type" Type="nvarchar" MaxLength="48" />
+  </EntityType>
+  <EntityType Name="route_directions">
+    <Key>
+      <PropertyRef Name="route_id" />
+      <PropertyRef Name="direction_short" />
+    </Key>
+    <Property Name="route_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="direction_long" Type="nvarchar" MaxLength="16" />
+    <Property Name="direction_short" Type="nvarchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="routes">
+    <Key>
+      <PropertyRef Name="route_id" />
+    </Key>
+    <Property Name="route_id" Type="nvarchar" MaxLength="55" Nullable="false" />
+    <Property Name="agency_id" Type="int" />
+    <Property Name="route_short_name" Type="nvarchar" MaxLength="16" />
+    <Property Name="route_long_name" Type="nvarchar" MaxLength="256" />
+    <Property Name="route_desc" Type="nvarchar" MaxLength="8" />
+    <Property Name="route_type" Type="int" />
+    <Property Name="route_url" Type="nvarchar" MaxLength="256" />
+    <Property Name="route_color" Type="nvarchar" MaxLength="48" />
+    <Property Name="route_text_color" Type="nvarchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="shapes">
+    <Key>
+      <PropertyRef Name="shape_id" />
+      <PropertyRef Name="shape_pt_sequence" />
+    </Key>
+    <Property Name="shape_id" Type="int" Nullable="false" />
+    <Property Name="shape_pt_lat" Type="float" />
+    <Property Name="shape_pt_lon" Type="float" />
+    <Property Name="shape_pt_sequence" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stop_times">
+    <Key>
+      <PropertyRef Name="trip_id" />
+      <PropertyRef Name="arrival_time" />
+      <PropertyRef Name="stop_id" />
+    </Key>
+    <Property Name="trip_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="arrival_time" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="departure_time" Type="nvarchar" MaxLength="16" />
+    <Property Name="stop_id" Type="int" Nullable="false" />
+    <Property Name="stop_sequence" Type="int" />
+    <Property Name="pickup_type" Type="int" />
+    <Property Name="drop_off_type" Type="int" />
+  </EntityType>
+  <EntityType Name="stops">
+    <Key>
+      <PropertyRef Name="stop_id" />
+    </Key>
+    <Property Name="stop_id" Type="int" Nullable="false" />
+    <Property Name="stop_name" Type="nvarchar" MaxLength="256" />
+    <Property Name="stop_desc" Type="nvarchar" MaxLength="16" />
+    <Property Name="stop_lat" Type="nvarchar" MaxLength="32" />
+    <Property Name="stop_lon" Type="nvarchar" MaxLength="32" />
+    <Property Name="stop_street" Type="nvarchar" MaxLength="64" />
+    <Property Name="stop_city" Type="nvarchar" MaxLength="64" />
+    <Property Name="stop_region" Type="nvarchar" MaxLength="64" />
+    <Property Name="stop_postcode" Type="nvarchar" MaxLength="16" />
+    <Property Name="stop_country" Type="nvarchar" MaxLength="32" />
+    <Property Name="zone_id" Type="nvarchar" MaxLength="16" />
+    <Property Name="wheelchair_boarding" Type="int" />
+    <Property Name="stop_url" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="trips">
+    <Key>
+      <PropertyRef Name="trip_id" />
+    </Key>
+    <Property Name="route_id" Type="nvarchar" MaxLength="32" />
+    <Property Name="service_id" Type="nvarchar" MaxLength="48" />
+    <Property Name="trip_id" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="trip_headsign" Type="nvarchar" MaxLength="64" />
+    <Property Name="block_id" Type="int" />
+    <Property Name="shape_id" Type="int" />
+    <Property Name="wheelchair_accessible" Type="bit" />
+  </EntityType>
+  <EntityContainer Name="metrotransit_dbModelStoreContainer">
+    <EntitySet Name="agency" EntityType="Self.agency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="authenticated_users" EntityType="Self.authenticated_users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="batch_load_date" EntityType="Self.batch_load_date" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="calendar" EntityType="Self.calendar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="calendar_dates" EntityType="Self.calendar_dates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="route_directions" EntityType="Self.route_directions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="routes" EntityType="Self.routes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shapes" EntityType="Self.shapes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="stop_times" EntityType="Self.stop_times" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="stops" EntityType="Self.stops" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="trips" EntityType="Self.trips" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
