@@ -230,3 +230,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 *.suo
+.vs/config/applicationhost.config
+*.cache
+.vs/TransitDataAPI/v14/.suo
